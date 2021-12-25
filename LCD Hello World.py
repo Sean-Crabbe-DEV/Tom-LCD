@@ -1,3 +1,9 @@
+# Messages
+
+message1 = ''
+message2 = ''
+
+
 #Imports
 from PCF8574 import PCF8574_GPIO
 from Adafruit_LCD1602 import Adafruit_CharLCD
@@ -10,8 +16,8 @@ def loop():
     while(True):  # While loop repets everything within untill interupted        
         #lcd.clear() # Cleears the LCD
         lcd.setCursor(0,0)  # set cursor position
-        lcd.message('Hello World') # Sets the Message to display
-        lcd.message('This Is A Test') # Sets the Message to display
+        lcd.message(message1)
+        lcd.message(message2)
         sleep(1) # Waits or Sleeps for 1 second 
 
 # Destroy (Clears LCD)     
