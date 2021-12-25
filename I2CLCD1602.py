@@ -1,7 +1,7 @@
 # Messages
 
-message1 = ''
-message2 = ''
+message1 = 'Hello World!'
+message2 = 'This is a test'
 
 
 #Imports
