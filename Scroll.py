@@ -1,7 +1,7 @@
 # Messages
 # Defines the messages to be sent
-message1 = 'H'
-message2 = 'i'
+message1 = 'Hello'
+message2 = ''
 
 #Imports
 from PCF8574 import PCF8574_GPIO
@@ -12,31 +12,30 @@ from time import sleep, strftime
 def loop():
     mcp.output(3,1) # turn on LCD backlight
     lcd.begin(16,2) # set number of LCD lines and columns on the LCD
+
+    lcd.setCursor(16,0)  # set cursor position
+    lcd.message(message1)
+    sleep(5)
+    lcd.clear()
+    lcd.setCursor(15,0)  # set cursor position
+    lcd.message(message1)
+    sleep(5)
+    lcd.clear()
+    lcd.setCursor(14,0)  # set cursor position
+    lcd.message(message1)
+    sleep(5)
+    lcd.clear()
+    lcd.setCursor(13,0)  # set cursor position
+    lcd.message(message1)
+    sleep(5)
+    lcd.clear()
+"""  
     while(True):  # While loop repets everything within untill interupted        
         #lcd.clear() # Cleears the LCD
-        lcd.setCursor(16,0)  # set cursor position
-        lcd.message(message1)
-        lcd.clear()
-        lcd.setCursor(15,0)  # set cursor position
-        lcd.message(message1)
-        lcd.clear()
-        lcd.setCursor(16,0)  # set cursor position
-        lcd.message(message2)
-        lcd.clear()
-        lcd.setCursor(14,0)  # set cursor position
-        lcd.message(message1)
-        lcd.clear()
-        lcd.setCursor(15,0)  # set cursor position
-        lcd.message(message2)
-        lcd.clear()
-        lcd.setCursor(13,0)  # set cursor position
-        lcd.message(message1)
-        lcd.clear()
-        lcd.setCursor(14,0)  # set cursor position
-        lcd.message(message2)
-        lcd.clear()
-
+        lcd.setCursor(0,0)  # set cursor position
+        lcd.message(message1)     
         sleep(1) # Waits or Sleeps for 1 second 
+"""
 
 # Destroy (Clears LCD)     
 def destroy():
