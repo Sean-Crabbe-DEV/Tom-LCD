@@ -17,6 +17,7 @@ def loop():
         #lcd.clear() # Cleears the LCD
         lcd.setCursor(0,0)  # set cursor position
         lcd.message(message1)
+        lcd.setCursor(0,1)  # set cursor position
         lcd.message(message2)
         sleep(1) # Waits or Sleeps for 1 second 
 
