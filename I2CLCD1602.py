@@ -1,8 +1,7 @@
 # Messages
-
+# Defines the messages to be sent
 message1 = 'Hello World!'
 message2 = 'This is a test'
-
 
 #Imports
 from PCF8574 import PCF8574_GPIO
