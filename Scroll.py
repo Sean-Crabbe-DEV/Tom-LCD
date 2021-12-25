@@ -1,41 +1,30 @@
-# Messages
-# Defines the messages to be sent
-message1 = 'Hello'
-message2 = ''
-
 #Imports
 from PCF8574 import PCF8574_GPIO
 from Adafruit_LCD1602 import Adafruit_CharLCD
 from time import sleep, strftime
+import RPi.GPIO as GPIO
+import time
+import Freenove_DHT as DHT
 
 #Loop 
 def loop():
     mcp.output(3,1) # turn on LCD backlight
     lcd.begin(16,2) # set number of LCD lines and columns on the LCD
+    dht = DHT.DHT(DHTPin)   #create a DHT class object
 
-    lcd.setCursor(16,0)  # set cursor position
-    lcd.message(message1)
-    sleep(5)
-    lcd.clear()
-    lcd.setCursor(15,0)  # set cursor position
-    lcd.message(message1)
-    sleep(5)
-    lcd.clear()
-    lcd.setCursor(14,0)  # set cursor position
-    lcd.message(message1)
-    sleep(5)
-    lcd.clear()
-    lcd.setCursor(13,0)  # set cursor position
-    lcd.message(message1)
-    sleep(5)
-    lcd.clear()
-"""  
-    while(True):  # While loop repets everything within untill interupted        
-        #lcd.clear() # Cleears the LCD
+    while(True):  # While loop repets everything within untill interupted  
+        for i in range(0,15):            
+            chk = dht.readDHT11()     #read DHT11 and get a return value. Then determine whether data read is normal according to the return value.
+            if (chk is dht.DHTLIB_OK):      #read DHT11 and get a return value. Then determine whether data read is normal according to the return value.
+                print("DHT11,OK!")
+                break
+            time.sleep(0.1)
+        print("Humidity : %.2f, \t Temperature : %.2f \n"%(dht.humidity,dht.temperature))
         lcd.setCursor(0,0)  # set cursor position
-        lcd.message(message1)     
-        sleep(1) # Waits or Sleeps for 1 second 
-"""
+        lcd.message("Temperature : %.2f \n"%(dht.temperature))
+        lcd.setCursor(0,1)  # set cursor position
+        lcd.message("Humidity : %.2f, \n"%(dht.humidity)) 
+        time.sleep(2)
 
 # Destroy (Clears LCD)     
 def destroy():
@@ -63,4 +52,33 @@ if __name__ == '__main__':
         loop() # Calls loop
     except KeyboardInterrupt:
         destroy() # Calls destroy if keboard inturupt is used
+
+
+import RPi.GPIO as GPIO
+import time
+import Freenove_DHT as DHT
+DHTPin = 11     #define the pin of DHT11
+
+def loop():
+    dht = DHT.DHT(DHTPin)   #create a DHT class object
+    counts = 0 # Measurement counts
+    while(True):
+        counts += 1
+        print("Measurement counts: ", counts)
+        for i in range(0,15):            
+            chk = dht.readDHT11()     #read DHT11 and get a return value. Then determine whether data read is normal according to the return value.
+            if (chk is dht.DHTLIB_OK):      #read DHT11 and get a return value. Then determine whether data read is normal according to the return value.
+                print("DHT11,OK!")
+                break
+            time.sleep(0.1)
+        print("Humidity : %.2f, \t Temperature : %.2f \n"%(dht.humidity,dht.temperature))
+        time.sleep(2)       
+        
+if __name__ == '__main__':
+    print ('Program is starting ... ')
+    try:
+        loop()
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+        exit()  
 
